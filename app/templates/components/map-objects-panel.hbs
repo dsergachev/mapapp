@@ -1,0 +1,186 @@
+<div class="map-filter_box-item map-filter_box-item-objects js-map-filter_box">
+<div class="filter-head">
+    <div class="filter-head-inner">
+        <div class="reg-field">
+            <i class="fa fa-search fa-lg likelink" aria-hidden="true" {{action "filterOKVED" filterdOkved}}></i>&nbsp;&nbsp;
+            <input type="text" value={{filterdOkved}} placeholder="Поиск по ОКВЭД" style="border:none;outline:none;width:208px;" onchange={{action "filterOKVED" value="target.value"}}/>
+            <span class="filter-region_close likelink" {{action "clearFilterOKved"}}>&times;</span>
+        </div>
+        <span class="pull-right" style="line-height:30px; cursor: pointer;" {{action "reset"}}>сбросить</span>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="regions-filter_container">
+    <div class="regions-filter__inner">
+        <div class="content mCustomScrollbar accordion" role="tablist" aria-multiselectable="true">
+
+            <div class="accordion-block">
+                <div class="panel-heading" role="tab" id="heading-7">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" role="button" data-toggle="collapse"
+                           data-parent="#accordion" href="#collapse-7" aria-expanded="false"
+                           aria-controls="collapse-7">
+                            Типы объектов <span class="fa fa-angle-down" aria-hidden="true"></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-7" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading-7">
+                    <div class="panel-body">
+                        <div class="square-btn-radio regions-filter_btn-radio">
+                        {{#if status_703161}}
+<input name="radio-1" id="a-1" type="radio" {{action "dropStatus" '703161' 'Проектируемый'}}><label
+                                class="col-sm-6 no-padding selected-status status-blue" for="a-1"> Проектируемый</label>
+
+                        {{else}}
+<input name="radio-1" id="a-1" type="radio" {{action "setStatus" '703161' 'Проектируемый'}}><label
+                                class="col-sm-6 no-padding" for="a-1"> Проектируемый</label>
+
+                        {{/if}}
+{{#if status_703326}}
+<input name="radio-1" id="b-1" type="radio" {{action "dropStatus" '703326' 'Строящийся'}}><label
+                                class="col-sm-6 no-padding selected-status status-yellow" for="b-1"> Строящийся</label>
+
+                        {{else}}
+<input name="radio-1" id="b-1" type="radio" {{action "setStatus" '703326' 'Строящийся'}}><label
+                                class="col-sm-6 no-padding" for="b-1"> Строящийся</label>
+
+                        {{/if}}
+{{#if status_703327}}
+<input name="radio-1" id="c-1" type="radio" {{action "dropStatus" '703327' 'Действующий'}}><label
+                                class="col-sm-6 no-padding selected-status status-green" for="c-1"> Действующий</label>
+
+                        {{else}}
+<input name="radio-1" id="c-1" type="radio" {{action "setStatus" '703327' 'Действующий'}}><label
+                                class="col-sm-6 no-padding" for="c-1"> Действующий</label>
+
+                        {{/if}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="accordion-block">
+                <div class="panel-heading" role="tab" id="heading-8">
+                    <h4 class="panel-title">
+                        <a class="accordion-toggle" role="button" data-toggle="collapse"
+                           data-parent="#accordion" href="#collapse-8" aria-expanded="false"
+                           aria-controls="collapse-8">
+                            Виды деятельности <span class="fa fa-angle-down"
+                                                    aria-hidden="true"></span>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-8" class="panel-collapse collapse" role="tabpanel"
+                     aria-labelledby="heading-8">
+                    <div class="panel-body">
+
+
+                        <div class="map-filter-tree map-filter-tree__check">
+                            {{ember-jstree
+                                data=data
+                                themes=themes
+                                plugins=plugins
+                                treeObject=jstreeObject
+                                actionReceiver=jstreeActionReceiver
+                                actionGetNode="handleGetNode"
+                                eventDidSelectNode="handleSelectNodes"
+                                eventDidDeselectNode="handleDeselectNodes"
+
+                            }}
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div><!-- /map-filter_box-item -->
+{{#if showobjectreestr}}
+<div class="map-filter-result js-result js-close-block">
+    <div class="map-filter-result__head">
+        <p>Объекты в выбранной области ({{objectreestr.length}})</p>
+        {{#if exportLink }}<a href="{{exportLink}}" target="_blank" class="fa fa-upload" style="position:absolute; top: 0px; right:40px;" title="Экспорт в Excel"></a>{{/if}}
+        <a href="javascript:void(0);" {{action "closeReestr"}} class="close js-close pull-right">&times;</a>
+    </div>
+
+    <div class="map-filter-result__inner content mCustomScrollbar light" data-mcs-theme="minimal-light" style="overflow-y:auto;overflow-x:hidden;">
+        {{#each objectreestr as |object index|}}
+        <div class="map-filter-result__item" title="{{object.Name}}">
+            <a href="#" {{action "showObjectCard" index}} class="js-card-open-1">{{plus index 1}}. {{object.Name}}</a>
+            <span>{{object.Address}}</span>
+        </div>
+        {{else}}
+        <div class='empty-reestr' style="padding-left: 15px;">
+            Нет данных для отображения в реестре. Выберите тип объекта или вид деятельности из фильтра.
+        </div>
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}
+{{#if showfullinfo}}
+{{#draggable-object content=this}}
+<div class="baloon baloon-d js-baloon-4 draggable js-close-block">
+<div class='project-card-item' >
+       <div class='project-card_inner'>
+       <a href="" class="close js-close" {{action "closeCard"}}>×</a>
+         <div class='project-card-item__head'>
+           <i class='fa fa-industry' aria-hidden='true'></i>
+           <h3> {{fullinfo.Name}}</h3>
+           <span> {{fullinfo.Address}} </span>
+         </div>
+       </div>
+       <div class='project-card-item__inner'>
+       <div class='project-card-item__inner-prop'>
+         <div>ОКВЭД</div>
+         <p> {{fullinfo.Okved}}</p>
+         <span>Вид деятельности</span>
+       </div>
+         <ul class='project-card-item__inner-list'>
+           <li>
+             <span><i class='fa fa-qrcode' aria-hidden='true'></i></span>
+             <span class='project-card-item__inner-list-name'> {{fullinfo.Founddate}}</span>
+             <span class='project-card-item__inner-list-desc'>Дата основания</span>
+           </li>
+           <li>
+             <span><i class='fa fa-university' aria-hidden='true'></i></span>
+             <span class='project-card-item__inner-list-name'> {{fullinfo.Chief}}</span>
+             <span class='project-card-item__inner-list-desc'>Руководитель</span>
+          </li>
+           <li>
+             <span><i class='fa fa-history' aria-hidden='true'></i></span>
+             <span class='project-card-item__inner-list-name'> {{fullinfo.Personals}}</span>
+             <span class='project-card-item__inner-list-desc'>Численность персонала</span>
+           </li>
+           <li>
+             <span><i class='fa fa-history' aria-hidden='true'></i></span>
+             <span class='project-card-item__inner-list-name'> {{fullinfo.Product}} </span>
+             <span class='project-card-item__inner-list-desc'>Основная продукция</span>
+           </li>
+           <li>
+             <span><i class='fa fa-history' aria-hidden='true'></i></span>
+             <span class='project-card-item__inner-list-name'> {{fullinfo.Contacts}}</span>
+             <span class='project-card-item__inner-list-desc'>Контактные лица</span>
+           </li>
+           <li>
+             <span><i class='fa fa-history' aria-hidden='true'></i></span>
+             <span class='project-card-item__inner-list-name'> {{fullinfo.Values}}</span>
+             <span class='project-card-item__inner-list-desc'>Объемы производства</span>
+           </li>
+         </ul>
+       </div>
+       <div class='project-card-item__bottom'>
+         <div class='text-center'>
+             Дата актуальности анкеты
+             <span> {{fullinfo.Actual}} </span>
+         </div>
+       </div>
+    </div>  
+</div>
+{{/draggable-object}}
+{{/if}}

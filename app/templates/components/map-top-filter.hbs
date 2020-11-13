@@ -1,0 +1,12 @@
+<div class="cover-black" style="display:{{if show 'block' 'none'}}" {{action 'hide'}}>
+    <div id="mapHome">
+        <div class="map-home">
+            <h3>Шаблоны выборок</h3>
+            <ul class="map-home__inner">
+                {{#each filters as |filter|}}
+                    {{map-top-filter-item filter=filter}}
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="panel-body_item {{if indicatorItem.selected 'selected-indicator'}} {{if indicatorItem.hideFromSearch 'hidden-indicator'}}" id="indicators-id-{{indicatorItem.id}}" rel="indicators-switcher">
+    <p class='indicator-link' {{action "selectIndicator" indicatorItem.id}}>{{indicatorItem.name}}</p>
+    <div class="panel-slider" >
+        {{range-slider
+            min=indicatorItem.min
+            max=indicatorItem.max
+            value=indicatorItem.value
+            changed='handleSliderChange'
+            reffid=indicatorItem.id
+        }}
+        <div class="range-val">
+            <table>
+                <tr>
+                    <td class="min-range"><span>{{format-number indicatorItem.min}}</span></td>
+                    <td><input type="text" class="js-slider-amount" readonly></td>
+                    <td class="max-range"><span>{{format-number indicatorItem.max}}</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

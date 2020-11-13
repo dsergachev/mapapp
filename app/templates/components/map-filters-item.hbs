@@ -1,0 +1,11 @@
+<div class="map-filter_box-item__sample-item" {{action "loadFilter"}}>
+    <div class="map-filter_box-item__sample-item-inner">
+        <p>{{{filter.getName}}}</p>
+        <span>{{format-date filter.date}}</span>
+        <div class="map-filter_box-item__sample-control">
+            <a class="js-tooltip {{if filter.ontop "active"}}" title="На главную страницу" {{action "filterOntopToggle" bubbles=false}}><i class="fa fa-star" aria-hidden="true"></i></a>
+            <a class="js-tooltip" title="Удалить" {{action "remove" bubbles=false}}><i class="fa fa-trash" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>
+

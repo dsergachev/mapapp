@@ -1,0 +1,57 @@
+<div class="map-filter_box-item map-filter_box-item-territory js-map-filter_box">
+    <div class="filter-head">
+        <div class="filter-head-inner">
+            <div class="reg-field">
+                <i class="fa fa-search fa-lg likelink" aria-hidden="true" {{action "filterOKATO" filterdOkato}}></i>&nbsp;&nbsp;
+                <input type="text" value={{filterdOkato}} placeholder="Поиск" style="border:none;outline:none;width:208px;" onchange={{action "filterOKATO" value="target.value"}}/>
+                <span class="filter-region_close likelink" {{action "clearFilterOkato"}}>&times;</span>
+            </div>
+            {{#if showneighborsswith}}
+            <div>
+                <div class="map-filter-switch">
+                    <div class="filter-switch">
+                        Включить соседние регионы
+                        <div class="onoffswitch" style="width: 30px; top: 5px; display: inline-block; margin-left: 15px;">
+                            {{#if neighbors}}
+                            <input type="checkbox" name="onoffswitch-neghbors" class="onoffswitch-checkbox"
+                                   id="myonoffswitch" checked="checked"  {{action "checkNeighbors" 'onoffswitch-neghbors'}}>
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch" style='background:#ff3823; top: 0px;' id="onoffswitch-neghbors-switcher"></span>
+                            </label>
+                            {{else}}
+                            <input type="checkbox" name="onoffswitch-neghbors" class="onoffswitch-checkbox"
+                                   id="myonoffswitch"  {{action "checkNeighbors" 'onoffswitch-neghbors'}}>
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch" style='background:#444; top: 0px; left: 3px;' id="onoffswitch-neghbors-switcher"></span>
+                            </label>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/if}}
+
+            <span class="pull-right" style="line-height:30px; cursor: pointer;" {{action "clearFilterOkato"}}>сбросить</span>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="map-filter-tree map-filter-tree__folder content mCustomScrollbar light"  data-mcs-theme="minimal-light">
+        {{ember-jstree
+            data=data
+            themes=themes
+            plugins=plugins
+            treeObject=jstreeObject
+
+            actionReceiver=jstreeActionReceiver
+            actionGetNode="handleGetNode"
+            eventDidSelectNode="handleSelectNodes"
+            eventDidDeselectNode="handleDeselectNodes"
+            eventDidOpen="handleOpenNode"
+            eventDidClose="handleCloseNode"
+            eventDidBecomeReady="handleReady"
+        }}
+    </div>
+</div>

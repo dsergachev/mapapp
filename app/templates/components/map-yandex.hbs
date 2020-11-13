@@ -1,0 +1,157 @@
+{{#if showgradient}}
+<div class='map-gradient' style={{styleGR}}><div class='gr-value-from'>{{minGR}}</div><div class='gr-value-to'>{{maxGR}}</div><div class="clearfix"></div><div class="map-gradient__title">{{indicatorName}}</div></div>
+{{/if}}
+<div id="map" style="height: 100%;"></div>
+
+{{#if showTemplatesBaloon}}
+      <div id="region-templates" style={{style}} class='draggable ui-draggable ui-draggable-handle'>
+          <div class="baloon baloon-b js-baloon-2" style="display: block;">
+             <a href="javascript:void(0);" class="close js-baloon-close" {{action "closeBallon"}}>×</a>
+               <p class="baloon-name-city">{{name}}</p>
+            <span style="line-height: 20px; font-size:10px; color: #777; display: block; text-align: center;margin-top:-5px;">выберите шаблон для печати</span>
+             <div class="baloon-region-template-table">
+             <table>
+                <tbody>
+              {{#each regionTemlates as |regionTemplate|}}
+                 <tr>
+                  <td><a href="/site/territory-print?id={{addressClasifierId}}&version={{regionTemplate.version}}" target="_blank">{{regionTemplate.name}}</a></td>
+                </tr>
+              {{/each}}
+                </tbody>
+             </table>
+             {{#if showRegionTemplatesNoData}}
+              <div style='text-align:center;color:#cc0011;font-weight:bold;padding:20px'>Шаблоны не найдены</div>
+             {{/if}}
+             </div>
+              <div class="baloon-link">
+              <a class="btn btn-siel btn-exsmall" href="" {{action "regionCloseTemplates" name}}>Закрыть</a>
+            </div>
+          </div>
+      </div>
+{{/if}}
+
+
+{{#if showTemplatesBaloon}}
+      <div id="region-templates" style={{style}} class='draggable ui-draggable ui-draggable-handle'>
+          <div class="baloon baloon-b js-baloon-2" style="display: block;">
+             <a href="javascript:void(0);" class="close js-baloon-close" {{action "closeBallon"}}>×</a>
+               <p class="baloon-name-city">{{name}}</p>
+            <span style="line-height: 20px; font-size:10px; color: #777; display: block; text-align: center;margin-top:-5px;">выберите шаблон для печати</span>
+             <div class="baloon-region-template-table">
+             <table>
+                <tbody>
+              {{#each regionTemlates as |regionTemplate|}}
+                 <tr>
+                  <td><a href="/site/territory-print?id={{addressClasifierId}}&version={{regionTemplate.version}}" target="_blank">{{regionTemplate.name}}</a></td>
+                </tr>
+              {{/each}}
+                </tbody>
+             </table>
+             {{#if showRegionTemplatesNoData}}
+              <div style='text-align:center;color:#cc0011;font-weight:bold;padding:20px'>Шаблоны не найдены</div>
+             {{/if}}
+             </div>
+              <div class="baloon-link">
+              <a class="btn btn-siel btn-exsmall" href="" {{action "regionCloseTemplates" name}}>Закрыть</a>
+            </div>
+          </div>
+      </div>
+{{/if}}
+
+{{#if showregionballon}} 
+
+        <div id="region-info" style={{style}} class='draggable ui-draggable ui-draggable-handle'>
+          <div class="baloon baloon-b js-baloon-2" style="display: block;">
+            <a href="javascript:void(0);" class="close js-baloon-close" {{action "closeBallon"}}>×</a>
+            {{#if noreginfo}}
+            <div style='text-align:center;color:#cc0011;font-weight:bold;padding:20px'>Информации по данной территории в базе данных нет</div>
+            {{else}}
+            <p class="baloon-name-city">{{name}}</p>
+            <span style="line-height: 20px; font-size:10px; color: #777; display: block; text-align: center;margin-top:-5px;">данные за {{year}}</span>
+            <div class="baloon-invest-table">
+              {{!--<table>
+                <tbody>
+                {{#each indicators as |indicatoritem|}}
+                <tr>
+                  <td><div style="width: 200px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;" title="{{indicatoritem.name}}">{{indicatoritem.name}}<span>{{indicatoritem.properties.871.value}}</span></div></td>
+                  <td>{{indicatoritem.properties.3738.value}}</td>
+                </tr>
+                {{/each}}
+
+              </tbody></table>
+              <div class="baloon-invest-table__bottom">
+                <div>
+                  <p>{{projectsCount}}</p>
+                  <span>всего проектов</span>
+                </div>
+                <div>
+                  <p>{{objectsCount}}</p>
+                  <span>всего объектов</span>
+                </div>
+                <div>
+                  <p>{{okvedTotal}}</p>
+                  <span>с выбранным оквэд</span>
+                </div>
+
+              </div>--}}
+            </div>
+
+
+            <div class="baloon-link">
+              <a class="btn btn-siel btn-exsmall" href="" {{action "regionShowTemplates" name}}>Подробно</a>
+            </div>
+            {{/if}}
+          </div>
+        </div>
+{{/if}}
+{{#if showfullinfo}}
+{{#draggable-object content=this}}
+<div id="region-full-info">
+
+
+    <h3 class='region-header' style="float:left">{{name}}</h3>
+    <a class="close" style="float: right; padding: 10px;" {{action "regionCloseMore" name}}>×</a>
+    <div class="clearfix"></div>
+<hr>
+<div class='indicator-data-container'>
+<div id='region-indicator-data'>
+{{#if preloader}}
+<div style='text-align:center;padding:30px;width:100%;height:100px;'>
+Пожалуйста, подождите. Идет выбор данных по текущему региону.
+</div>
+<center style='margin-top:20px'><img src='/img/103.gif'></center>
+{{else}}
+        <table class='indicator-table'>
+        <thead><th>Показатель</th><th>Значения по периодам</th></thead>
+        {{#each indicatorvalues as |indicator|}} 
+        <tr>
+        <td>{{#each indicator.path as |path index|}}<p class='indicator-header-level-{{index}}'>{{path}}</p>{{/each}}</td>
+        <td><table><tr>{{#each indicator.values as |indvalue|}}<td><p class='top-time'>{{indvalue.Time}}</p><p class='bottom-value'>{{indvalue.Value}}</p><p class='unit-line'>({{indvalue.Unit}})</p></td>{{/each}}</tr></table></td>
+        </tr>
+        {{/each}}  
+        </table>
+{{/if}}
+</div>
+</div>
+
+<hr>
+<div class="baloon-link">
+      <a class="btn btn-siel btn-exsmall" href="" {{action "regionCloseMore" name}}>Закрыть</a>
+</div>
+</div>
+{{/draggable-object}}
+{{/if}}
+
+{{#if showTerritorySelectBaloon}}
+    <div id="region-info" style={{style}} class='draggable ui-draggable ui-draggable-handle'>
+      <div class="baloon baloon-b js-baloon-2" style="display: block;">
+        <a href="javascript:void(0);" class="close js-baloon-close" {{action "closeBallon"}}>×</a>
+        <p class="baloon-name">Что вы хотите выбрать в этой точке?</p>
+        <ul class="baloon-list">
+          {{#each selectTerritories as |territory|}}
+            {{territory-select-list-item territory=territory selectTerritory=(action "selectTerritory")}}
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+{{/if}}

@@ -1,0 +1,16 @@
+<div class="accordion-block {{if indicatorheader.hideFromSearch 'hidden-indicator'}}">
+    <div class="panel-heading" role="tab" id="heading-{{indicatorheader.id}}">
+        <h4 class="panel-title">
+            <a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{indicatorheader.id}}" aria-expanded="false"  aria-controls="collapse-{{indicatorheader.id}}">
+                {{indicatorheader.name}} <span class="fa fa-angle-up" aria-hidden="true"></span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapse-{{indicatorheader.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{indicatorheader.id}}">
+        <div class="panel-body">
+            {{#each indicatorheader.indicators as |indicatoritem|}}
+                {{indicators-item indicatorItem=indicatoritem}}
+            {{/each}}
+        </div>
+    </div>
+</div>

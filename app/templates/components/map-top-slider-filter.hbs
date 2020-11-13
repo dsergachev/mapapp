@@ -1,0 +1,13 @@
+<div class="map-home_slider js-map-home_slider">
+    <div class="js-bp-template-slider swiper-container">
+        <div class="swiper-wrapper">
+            {{#each filters as |filter|}}
+                <div class="swiper-slide map-home_item map-home_item_slider" {{action 'loadFilter' filter bubbles=false}}>
+                    <div>
+                        <p style="cursor: pointer;">{{{filter.getName}}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

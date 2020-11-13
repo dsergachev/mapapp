@@ -1,0 +1,40 @@
+<ul class="map-filter_tabs js-map-filter_tabs">
+                
+                <li class='{{if active_territory "active" "" }}' {{action "showBlock" 'territory'}}>
+                    <i class="fa fa-globe" aria-hidden="true" ></i>
+                    {{#if countterritory}}
+                    <span class="map-filter_tabs-counter cycle-counter js-map-filter_tabs-counter">{{countterritory}}</span>
+                    {{/if}}
+                    <span>Территории</span></li>
+                <li class='{{if active_indicators "active" "" }}' {{action "showBlock" 'indicators'}}>
+                    <i class="fa fa-pie-chart" aria-hidden="true" ></i>
+                    {{#if countindicators}}
+                    <span class="map-filter_tabs-counter cycle-counter js-map-filter_tabs-counter">{{countindicators}}</span>
+                    {{/if}}
+                    <span>Показатели </span></li>
+                <li class='{{if active_objects "active" "" }}' {{action "showBlock" 'objects'}}>
+                    <i class="fa fa-industry" aria-hidden="true"></i>
+                    {{#if counttobjects}}
+                    <span class="map-filter_tabs-counter cycle-counter js-map-filter_tabs-counter">{{counttobjects}}</span>
+                    {{/if}}
+                    <span>Объекты</span></li>
+                <li class='{{if active_projects "active" "" }}' {{action "showBlock" 'projects'}}>
+                    <i class="fa fa-briefcase" aria-hidden="true"></i>
+                    {{#if counttprojects}}
+                    <span class="map-filter_tabs-counter cycle-counter js-map-filter_tabs-counter">{{counttprojects}}</span>
+                    {{/if}}
+                    <span>Проекты</span></li>
+                <li class='{{if active_filters "active" "" }}' {{action "showBlock" 'filters'}}>
+                    <i class="fa fa-bookmark" aria-hidden="true"></i>
+                    {{#if counterfilters}}
+                    <span class="map-filter_tabs-counter cycle-counter js-map-filter_tabs-counter">{{counterfilters}}</span>
+                    {{/if}}
+                    <span>Мои выборки</span></li>
+                <li class='{{if active_history "active" "" }}' {{action "showBlock" 'history'}}>
+                    <i class="fa fa-history" aria-hidden="true"></i>
+                    {{#if counterhistory}}
+                    <span class="map-filter_tabs-counter cycle-counter js-map-filter_tabs-counter">{{counterhistory}}</span>
+                    {{/if}}
+                    <span>История</span></li>
+            </ul>
+
